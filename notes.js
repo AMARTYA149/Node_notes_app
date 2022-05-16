@@ -19,6 +19,15 @@ const addNotes = function (title, body) {
   }
 };
 
+const removeNote = function (title) {
+  // console.log(title);
+  const notes = loadNotes();
+  const notesToKeep = notes.filter(function (note) {
+    return note.title !== title;
+  });
+  saveNotes(notesToKeep);
+};
+
 const saveNotes = function (notes) {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
@@ -34,4 +43,8 @@ const loadNotes = function () {
   }
 };
 
-module.exports = { getNotes: getNotes, addNotes: addNotes };
+module.exports = {
+  getNotes: getNotes,
+  addNotes: addNotes,
+  removeNote: removeNote,
+};
